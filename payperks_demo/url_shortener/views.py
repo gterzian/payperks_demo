@@ -15,12 +15,6 @@ def home(request):
     context = {}
     context['short_urls'] = ShortenedURL.objects.all()
     return render(request, 'url_shortener/index.html', context)
-    
-
-def redirected(request, full_url):
-    context = {}
-    context['short_urls'] = ShortenedURL.objects.all()
-    return render(request, 'url_shortener/index.html', context)
 
 
 def short_url_redirect(request, short_url):
