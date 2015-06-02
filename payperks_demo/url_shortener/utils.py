@@ -2,10 +2,9 @@ import itertools
 import string
 import random
 
-
-
-RANDOM_LETTERS = ''.join(random.sample(string.letters, len(string.letters)))
-
+#not using o and 0 for easy typeability
+LETTERS_AND_DIGITS = list(itertools.chain(string.letters.replace('o', ''), string.digits.replace('0', '')))
+RANDOM_LETTERS = ''.join(random.sample(LETTERS_AND_DIGITS, len(LETTERS_AND_DIGITS)))
 
 def short_string(length=4, already=None):
     if already is None:
