@@ -19,9 +19,13 @@ class ShortenedUrlViewSet(viewsets.ModelViewSet):
         if ShortenedURL.objects.filter(original=request.POST['original']).exists():
             shortened_url = ShortenedURL.objects.get(original=request.POST['original'])
             serializer = ShortenedUrlSerializer(shortened_url)
+            return Response(serializer.data, status=status.HTTP_200_OK)
         else:
             serializer = ShortenedUrlSerializer(data=request.POST)
             if serializer.is_valid():
                 serializer.save()
                 return Response(serializer.data, status=status.HTTP_201_CREATED)
-        return Response(serializer.data, status=status.HTTP_200_OK)
+            else:
+                return Response(serializer.errors)
+        
+        
