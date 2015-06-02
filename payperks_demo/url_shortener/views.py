@@ -13,7 +13,7 @@ from payperks_demo.url_shortener.serializers import ShortenedUrlSerializer
 
 def home(request):
     context = {}
-    context['short_urls'] = ShortenedURL.objects.all()
+    context['short_urls'] = ShortenedURL.objects.all().order_by('-pk')
     return render(request, 'url_shortener/index.html', context)
 
 
