@@ -31,6 +31,31 @@
          <p class="lead">Currently, it's only an API, and it comes with a nice built-in interface</p>
          <p><a class="btn btn-lg btn-success" href="/api/" role="button">Browse the API</a></p>
        </div>
+       
+       <div class="table-responsive">
+                   <table class="table table-striped">
+                     <thead>
+                       <tr>
+                         <th>Original url</th>
+                         <th>shortened url</th>
+                       </tr>
+                     </thead>
+                     <tbody>
+                       {% for url in short_urls %}
+                        
+                         <tr>
+                           <td>{{url.original}}</td>
+                           <td> <a href="{% url 'short_url_redirect'  url.shortened %}">{% url 'short_url_redirect'  url.shortened %}</a></td>
+                         </tr>
+                         {% endfor %}
+                     </tbody>
+                   </table>
+                 </div>
+       
+       {% for url in short_urls %}
+         <a href="{% url 'short_url_redirect'  url.shortened %}">{% url 'short_url_redirect'  url.shortened %}</a>
+         
+         {% endfor %}
 
 
        <footer class="footer">

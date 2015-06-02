@@ -13,6 +13,7 @@ from payperks_demo.url_shortener.serializers import ShortenedUrlSerializer
 
 def home(request):
     context = {}
+    context['short_urls'] = ShortenedURL.objects.all()
     return render(request, 'url_shortener/index.html', context)
     
 
@@ -23,8 +24,8 @@ def redirected(request, full_url):
 
 
 def short_url_redirect(request, short_url):
-    get_object_or_404(ShortenedURL, shortened=short_url)
-    return HttpResponseRedirect(reverse('redirected', args=[short_url]))
+    url = get_object_or_404(ShortenedURL, shortened=short_url)
+    return HttpResponseRedirect(url.original)
 
 
 
