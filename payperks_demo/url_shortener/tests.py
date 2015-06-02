@@ -15,7 +15,7 @@ from payperks_demo.url_shortener.utils import short_string, LETTERS_AND_DIGITS
 
 class TestShortString(Exam, TestCase):
     
-    def test_short_string_returns_result_of_lenght(self):
+    def test_short_string_returns_result_of_length(self):
         for i in range(10):
             result = short_string(length=i)
             self.assertEquals(len(result), i)
