@@ -70,3 +70,18 @@ class TestShortenedURLViews(Exam, TestCase):
         self.assertEqual(data['original'], 'test_POST')
         self.assertEqual(ShortenedURL.objects.filter(original='test_POST').count(), 1)
         
+
+
+class TestHome(TestCase):
+    
+    def test_home_200(self):
+        resp = self.client.get(reverse('home'))
+        self.assertEquals(resp.status_code, 200)
+        
+
+class TestHomeRedirect(TestCase):
+    
+    def test_home_redirect_200(self):
+        resp = self.client.get(reverse('home_redirect', args=['12As']))
+        self.assertEquals(resp.status_code, 200)
+        

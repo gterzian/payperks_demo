@@ -2,8 +2,20 @@ from rest_framework import viewsets
 from rest_framework import status
 from rest_framework.response import Response
 
+from django.http import HttpResponse
+
 from payperks_demo.url_shortener.models import ShortenedURL
 from payperks_demo.url_shortener.serializers import ShortenedUrlSerializer
+
+
+def home(request):
+    
+    return HttpResponse('ok')
+
+
+def home_redirect(request, short_url):
+    
+    return HttpResponse('ok')
 
 
 
