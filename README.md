@@ -1,7 +1,7 @@
 ###PayPerks Url Shortener
 
 [![Build Status](https://travis-ci.org/gterzian/payperks_demo.svg?branch=master)](https://travis-ci.org/gterzian/payperks_demo)
-
+[![Coverage Status](https://coveralls.io/repos/gterzian/payperks_demo/badge.svg?branch=master)](https://coveralls.io/r/gterzian/payperks_demo?branch=master)
 
 ####Some assumptions
 * Let's keep the demo simple, there is no auth or concept of users, and everything, including the API, is fully public.
