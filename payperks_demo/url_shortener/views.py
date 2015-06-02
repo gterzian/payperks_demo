@@ -17,7 +17,6 @@ def home(request):
     
 
 def redirected(request, full_url):
-    return HttpResponse(full_url)
     context = {}
     context['full_url'] = full_url
     return render(request, 'url_shortener/index.html', context)
