@@ -2,7 +2,8 @@ from rest_framework import viewsets
 from rest_framework import status
 from rest_framework.response import Response
 
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
+from django.core.urlresolvers import reverse
 
 from payperks_demo.url_shortener.models import ShortenedURL
 from payperks_demo.url_shortener.serializers import ShortenedUrlSerializer
@@ -11,11 +12,14 @@ from payperks_demo.url_shortener.serializers import ShortenedUrlSerializer
 def home(request):
     
     return HttpResponse('ok')
-
-
-def home_redirect(request, short_url):
     
-    return HttpResponse('ok')
+
+def redirected(request, full_url):
+    return HttpResponse(full_url)
+
+
+def short_url_redirect(request, short_url):
+    return HttpResponseRedirect(reverse('redirected', args=[short_url]))
 
 
 

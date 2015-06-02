@@ -81,7 +81,15 @@ class TestHome(TestCase):
 
 class TestHomeRedirect(TestCase):
     
-    def test_home_redirect_200(self):
-        resp = self.client.get(reverse('home_redirect', args=['12As']))
+    def test_home_redirect_302(self):
+        resp = self.client.get(reverse('short_url_redirect', args=['12As']))
+        self.assertEquals(resp.status_code, 302)
+    
+    def test_manual_home_redirect_302(self):
+        resp = self.client.get('/short/A23d/')
+        self.assertEquals(resp.status_code, 302)
+    
+    def test_follow_redirect(self):
+        resp = self.client.get('/short/A23d/', follow=True)
         self.assertEquals(resp.status_code, 200)
         
