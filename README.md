@@ -1,7 +1,7 @@
 ###PayPerks Url Shortener
 
 [![Build Status](https://travis-ci.org/gterzian/payperks_demo.svg?branch=master)](https://travis-ci.org/gterzian/payperks_demo)
-[![Coverage Status](https://coveralls.io/repos/gterzian/payperks_demo/badge.svg?branch=master)](https://coveralls.io/r/gterzian/payperks_demo?branch=master)
+[![Coverage Status](https://coveralls.io/repos/gterzian/payperks_demo/badge.svg)](https://coveralls.io/r/gterzian/payperks_demo)
 [![Deploy](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy)
 
 ####Some assumptions
