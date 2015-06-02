@@ -24,7 +24,7 @@ module.exports = function(config) {
     "bower_components/lodash/dist/lodash.js",
     "bower_components/zeroclipboard/dist/ZeroClipboard.js",
     "bower_components/ng-clip/src/ngClip.js",
-    
+    "bower_components/angular-mocks/angular-mocks.js",
     "scripts/controllers/*.js",
     "scripts/*.js",
       
