@@ -14,12 +14,14 @@
 
   </head>
   <body>
+    
     <div class="container">
+      
        <div class="header clearfix">
          <nav>
            <ul class="nav nav-pills pull-right">
-             <li role="presentation" class="active"><a href="/">Home</a></li>
-
+             <li role="presentation" class="active"><a href="/api/" role="button">Browse the API</a></li>
+ 
            </ul>
          </nav>
          <h3 class="text-muted">PayPerks Url shortener</h3>
@@ -27,13 +29,22 @@
 
        <div class="jumbotron">
          <h1>Welcome to the PayPerks Url shortener</h1>
-         <p class="lead">Currently, it's only an API, and it comes with a nice built-in interface</p>
-         <p><a class="btn btn-lg btn-success" href="/api/" role="button">Browse the API</a></p>
+        <p class="lead">You can create short urls below and view the ones already created, or directly <a href="/api/" >Browse the API</a></p>
        </div>
        
+   
+       
+      
        <h3>Create a new short URL</h1>
+        <div id='error_panel' class="panel panel-danger">
+          <div class="panel-heading">There was an error shortening the URL</div>
+          <div id='error_content' class="panel-body">
+            Panel content
+          </div>
+        </div>
        <form class="form-inline" id='url_form' action="{% url 'create_new_shortened_url' %}" method="POST" enctype="multipart/form-data" class="form-horizontal" novalidate="">
          {% csrf_token %}
+         
          <div class="form-group">
            <label for="exampleInputName2">URL</label>
            <div class="input-group">
@@ -61,7 +72,7 @@
                          <tr>
                            <td>{{url.original}}</td>
                            <td> <a href="{% url 'short_url_redirect'  url.shortened %}">{% url 'short_url_redirect'  url.shortened %}</a></td>
-                           <td>sit</td>
+                         
                          </tr>
                          {% endfor %}
                      </tbody>
@@ -84,10 +95,28 @@
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.js"></script>
   <script src="//cdnjs.cloudflare.com/ajax/libs/lodash.js/3.5.0/lodash.min.js"></script>
   <script>
+  var base_url = '{{request.get_host}}';
+  $('#error_panel').hide();
+  var show_error = function (error) {
+    $('#error_content').text(error);
+    $('#error_panel').show();
+  };
   $('#create_url').click(
     function(event){
       event.preventDefault();
-      var input = $('#original').val();
+      var url = $('#original').val();
+      if (url == null) {
+        show_error('Please input an url')
+        return
+      }
+      if (!(_.includes(url, 'http://') || _.includes(url, 'https://'))) {
+        show_error('Please input a valid url starting with http:// or https://')
+        return
+      }
+      if (!_.includes(url, base_url)) {
+        show_error('Please input a valid url starting with http://' + base_url)
+        return
+      }
       $('#url_form').submit();
     }
   
