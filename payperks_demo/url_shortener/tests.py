@@ -58,7 +58,7 @@ class TestShortenedURLViews(Exam, TestCase):
         short_url = ShortenedURL.objects.get(original='test_POST')
         self.assertTrue(short_url.shortened)
     
-    def test_unique_original(self):
+    def test_unique_original_is_returned_on_second_request(self):
         resp = self.client.post(reverse('api:shortenedurl-list'), {'original': 'test_POST', 'shortened': ''})
         self.assertEqual(resp.status_code, 201)
         short_url = ShortenedURL.objects.get(original='test_POST')
