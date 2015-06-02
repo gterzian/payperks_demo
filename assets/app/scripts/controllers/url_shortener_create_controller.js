@@ -4,7 +4,7 @@ var urlShortenerApp = angular.module('urlShortenerApp', ['ngClipboard']).config(
   $httpProvider.defaults.xsrfHeaderName = 'X-CSRFToken';
 });
 
-urlShortenerApp.controller('urlShortenerCreateUrlCtrl', ['$scope', '$rootScope', function ($scope, $rootScope) {
+urlShortenerApp.controller('urlShortenerCreateUrlCtrl', ['$scope', '$rootScope', '$http', function ($scope, $rootScope, $http) {
   
   $scope.resetUrl = function () {
     $scope.url = null;
@@ -31,7 +31,18 @@ urlShortenerApp.controller('urlShortenerCreateUrlCtrl', ['$scope', '$rootScope',
     }
     
     if (_.endsWith($scope.url, '/')) {
-      $scope.url = 'test';
+     
+    $http.post('/api/short_urls', {original:$scope.url, shortened:''}).
+      success(function(data, status, headers, config) {
+        // this callback will be called asynchronously
+        // when the response is available
+        console.log(data)
+      }).
+      error(function(data, status, headers, config) {
+        console.log(data)
+        // called asynchronously if an error occurs
+        // or server returns response with an error status.
+      });  
       $scope.generated = true;
       $scope.error = null;
     }

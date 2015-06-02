@@ -16,10 +16,6 @@
   <body ng-app='urlShortenerApp'>
      
         <div class="panel-body"  ng-controller='urlShortenerCreateUrlCtrl'>
-         
-        
-             
-        
             <form class="form-inline" role="form">
             <input type="text" class="form-control"   ng-hide='generated' ng-model="url" />
              <p ng-show='generated' >{[url]}</p>

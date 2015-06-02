@@ -15,10 +15,11 @@ describe('Controller: trackingScriptCtrl', function () {
     });
   }));
 
-  
-  it('The tracking script should initialize to an empty string, script_generate to false', function () {
-    expect(true).to.be.true;
-    
+  it('Should initialize the scope', function () {
+    expect(scope.error).to.be.null;
+    expect(scope.url).to.be.null;
+    exepct(scope.generated).to.be.false;
+    exepct(scope.url_copied).to.be.false;
   });
   
 });
