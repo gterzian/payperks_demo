@@ -10,7 +10,7 @@ from django.test.utils import override_settings
 from django.core.urlresolvers import reverse
 from django.test import TestCase
 
-from payperks_demo.url_shortener.utils import short_string
+from payperks_demo.url_shortener.utils import short_string, LETTERS_AND_DIGITS
 
 
 class TestShortString(Exam, TestCase):
@@ -26,4 +26,6 @@ class TestShortString(Exam, TestCase):
             result = short_string(already=already_generated)
             self.assertTrue(result not in already_generated)
             already_generated.append(result)
+            for letter in result:
+                self.assertTrue(letter in LETTERS_AND_DIGITS)
         
