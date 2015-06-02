@@ -1,0 +1,2 @@
+[run]
+omit = ./*migrations*, ./*tests*, ./payperks_demo/settings.py, ./payperks_demo/wsgi.py, ./payperks_demo/urls.py
