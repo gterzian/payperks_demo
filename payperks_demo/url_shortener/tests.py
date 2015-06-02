@@ -67,5 +67,6 @@ class TestShortenedURLViews(Exam, TestCase):
         resp = self.client.post(reverse('api:shortenedurl-list'), {'original': 'test_POST', 'shortened': ''})
         self.assertEqual(resp.status_code, 200)
         data = json.loads(resp.content)
-        self.assertEquals(data['original'], 'test_POST')
+        self.assertEqual(data['original'], 'test_POST')
+        self.assertEqual(ShortenedURL.objects.filter(original='test_POST').count(), 1)
         
