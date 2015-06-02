@@ -4,6 +4,7 @@ from rest_framework.response import Response
 
 from django.http import HttpResponse, HttpResponseRedirect
 from django.core.urlresolvers import reverse
+from django.shortcuts import get_object_or_404
 
 from payperks_demo.url_shortener.models import ShortenedURL
 from payperks_demo.url_shortener.serializers import ShortenedUrlSerializer
@@ -19,6 +20,7 @@ def redirected(request, full_url):
 
 
 def short_url_redirect(request, short_url):
+    get_object_or_404(ShortenedURL, shortened=short_url)
     return HttpResponseRedirect(reverse('redirected', args=[short_url]))
 
 

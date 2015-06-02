@@ -81,15 +81,26 @@ class TestHome(TestCase):
 
 class TestHomeRedirect(TestCase):
     
+    @fixture
+    def shortened_url(self):
+        return ShortenedURL.objects.create(original='test/', shortened='A23d')
+    
     def test_home_redirect_302(self):
-        resp = self.client.get(reverse('short_url_redirect', args=['12As']))
+        self.shortened_url
+        resp = self.client.get(reverse('short_url_redirect', args=['A23d']))
         self.assertEquals(resp.status_code, 302)
     
+    def test_home_redirect_404(self):
+        resp = self.client.get(reverse('short_url_redirect', args=['A23d']))
+        self.assertEquals(resp.status_code, 404)
+    
     def test_manual_home_redirect_302(self):
+        self.shortened_url
         resp = self.client.get('/m/A23d/')
         self.assertEquals(resp.status_code, 302)
     
     def test_follow_redirect(self):
+        self.shortened_url
         resp = self.client.get('/m/A23d/', follow=True)
         self.assertEquals(resp.status_code, 200)
         
