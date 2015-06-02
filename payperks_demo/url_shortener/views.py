@@ -19,14 +19,25 @@ def home(request):
 
 def redirected(request, full_url):
     context = {}
-    context['full_url'] = full_url
+    context['short_urls'] = ShortenedURL.objects.all()
     return render(request, 'url_shortener/index.html', context)
 
 
 def short_url_redirect(request, short_url):
     url = get_object_or_404(ShortenedURL, shortened=short_url)
     return HttpResponseRedirect(url.original)
+    
 
+def create_new_shortened_url(request):
+    '''In case of an existing shortened url for the original, we return the existing one'''
+    if ShortenedURL.objects.filter(original=request.POST['original']).exists():
+        shortened_url = ShortenedURL.objects.get(original=request.POST['original'])
+        serializer = ShortenedUrlSerializer(shortened_url)
+    else:
+        serializer = ShortenedUrlSerializer(data=request.POST)
+        if serializer.is_valid():
+            serializer.save()
+    return HttpResponseRedirect('/#url_list')
 
 
 class ShortenedUrlViewSet(viewsets.ModelViewSet):
@@ -49,5 +60,4 @@ class ShortenedUrlViewSet(viewsets.ModelViewSet):
                 return Response(serializer.data, status=status.HTTP_201_CREATED)
             else:
                 return Response(serializer.errors)
-        
-        
+               

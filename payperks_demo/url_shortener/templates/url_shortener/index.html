@@ -18,9 +18,8 @@
        <div class="header clearfix">
          <nav>
            <ul class="nav nav-pills pull-right">
-             <li role="presentation" class="active"><a href="#">Home</a></li>
-             <li role="presentation"><a href="#">About</a></li>
-             <li role="presentation"><a href="#">Contact</a></li>
+             <li role="presentation" class="active"><a href="/">Home</a></li>
+
            </ul>
          </nav>
          <h3 class="text-muted">PayPerks Url shortener</h3>
@@ -32,6 +31,22 @@
          <p><a class="btn btn-lg btn-success" href="/api/" role="button">Browse the API</a></p>
        </div>
        
+       <h3>Create a new short URL</h1>
+       <form class="form-inline" id='url_form' action="{% url 'create_new_shortened_url' %}" method="POST" enctype="multipart/form-data" class="form-horizontal" novalidate="">
+         {% csrf_token %}
+         <div class="form-group">
+           <label for="exampleInputName2">URL</label>
+           <div class="input-group">
+                 <span class="input-group-addon">@</span>
+                 <input name="original" id="original" class="form-control" type="text" value="">
+               </div>
+           
+         </div>
+         <button type="submit" id='create_url' class="btn btn-default">Create a shortened version</button>
+       </form>
+       
+       
+       <h3 id='url_list'>List of all short URLs</h1>
        <div class="table-responsive">
                    <table class="table table-striped">
                      <thead>
@@ -46,16 +61,14 @@
                          <tr>
                            <td>{{url.original}}</td>
                            <td> <a href="{% url 'short_url_redirect'  url.shortened %}">{% url 'short_url_redirect'  url.shortened %}</a></td>
+                           <td>sit</td>
                          </tr>
                          {% endfor %}
                      </tbody>
                    </table>
                  </div>
        
-       {% for url in short_urls %}
-         <a href="{% url 'short_url_redirect'  url.shortened %}">{% url 'short_url_redirect'  url.shortened %}</a>
-         
-         {% endfor %}
+     
 
 
        <footer class="footer">
@@ -69,12 +82,17 @@
   </body>
   
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.js"></script>
-  <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/zeroclipboard/2.2.0/ZeroClipboard.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.15/angular.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.15/angular-mocks.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.15/angular-route.min.js"></script>
   <script src="//cdnjs.cloudflare.com/ajax/libs/lodash.js/3.5.0/lodash.min.js"></script>
-  <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/ng-clip/0.2.6/ng-clip.min.js"></script>
-  <script src="{% static 'app/scripts/controllers/url_shortener_create_controller.js' %}"></script>
+  <script>
+  $('#create_url').click(
+    function(event){
+      event.preventDefault();
+      var input = $('#original').val();
+      $('#url_form').submit();
+    }
+  
+  )
+  
+  </script>
 
 </html>
