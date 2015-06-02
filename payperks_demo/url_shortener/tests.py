@@ -11,6 +11,7 @@ from django.core.urlresolvers import reverse
 from django.test import TestCase
 
 from payperks_demo.url_shortener.utils import short_string, LETTERS_AND_DIGITS
+from payperks_demo.url_shortener.models import ShortenedURL
 
 
 class TestShortString(TestCase):
@@ -32,6 +33,10 @@ class TestShortString(TestCase):
 
 class TestShortenedURLViews(Exam, TestCase):
     
+    @fixture
+    def shortened_url(self):
+        return ShortenedURL.objects.create(original='test/', shortened='uu')
+    
     def test_api_root(self):
         resp = self.client.get(reverse('api:api-root'))
         self.assertEqual(resp.status_code, 200)
@@ -39,4 +44,11 @@ class TestShortenedURLViews(Exam, TestCase):
     def test_shortened_urls_list_view(self):
         resp = self.client.get(reverse('api:shortenedurl-list'))
         self.assertEqual(resp.status_code, 200)
+        
+    def test_shortened_urls_list_view_with_shortened_url(self):
+        self.shortened_url
+        resp = self.client.get(reverse('api:shortenedurl-list'))
+        self.assertEqual(resp.status_code, 200)
+        data = json.loads(resp.content)
+        self.assertEquals(data['results'], [{u'original': u'test/', u'shortened': u'uu'}])
         

@@ -8,7 +8,6 @@ from payperks_demo.url_shortener import views
 
 router = routers.DefaultRouter()
 router.register(r'short_urls', views.ShortenedUrlViewSet)
-print router.urls
 
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
