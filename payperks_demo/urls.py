@@ -11,7 +11,7 @@ router.register(r'short_urls', views.ShortenedUrlViewSet)
 
 urlpatterns = [
     url(r'^$', views.home, name='home'),
-    url(r'^short/(?P<short_url>[0-9a-zA-z]{4})/$', views.short_url_redirect, name='short_url_redirect'),
+    url(r'^m/(?P<short_url>[0-9a-zA-z]{4})/$', views.short_url_redirect, name='short_url_redirect'),
     url(r'^api/', include(router.urls, namespace='api')),
     url(r'^(?P<full_url>.+)$', views.redirected, name='redirected'),
     

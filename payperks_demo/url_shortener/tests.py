@@ -86,10 +86,10 @@ class TestHomeRedirect(TestCase):
         self.assertEquals(resp.status_code, 302)
     
     def test_manual_home_redirect_302(self):
-        resp = self.client.get('/short/A23d/')
+        resp = self.client.get('/m/A23d/')
         self.assertEquals(resp.status_code, 302)
     
     def test_follow_redirect(self):
-        resp = self.client.get('/short/A23d/', follow=True)
+        resp = self.client.get('/m/A23d/', follow=True)
         self.assertEquals(resp.status_code, 200)
         
