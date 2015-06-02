@@ -13,21 +13,37 @@
 
 
   </head>
-  <body ng-app='urlShortenerApp'>
+  <body>
+    <div class="container">
+       <div class="header clearfix">
+         <nav>
+           <ul class="nav nav-pills pull-right">
+             <li role="presentation" class="active"><a href="#">Home</a></li>
+             <li role="presentation"><a href="#">About</a></li>
+             <li role="presentation"><a href="#">Contact</a></li>
+           </ul>
+         </nav>
+         <h3 class="text-muted">PayPerks Url shortener</h3>
+       </div>
+
+       <div class="jumbotron">
+         <h1>Welcome to the PayPerks Url shortener</h1>
+         <p class="lead">Currently, it's only an API, and it comes with a nice built-in interface</p>
+         <p><a class="btn btn-lg btn-success" href="/api/" role="button">Browse the API</a></p>
+       </div>
+
+
+       <footer class="footer">
+         <p>&copy; PayPerks, 2015</p>
+       </footer>
+
+     </div> <!-- /container -->
      
-        <div class="panel-body"  ng-controller='urlShortenerCreateUrlCtrl'>
-            <form class="form-inline" role="form">
-            <input type="text" class="form-control"   ng-hide='generated' ng-model="url" />
-             <p ng-show='generated' >{[url]}</p>
-            <button class='btn' ng-hide='generated' ng-click="generateShortUrl()">Generate url</button>
-             <button  class='btn' ng-show='generated' clip-click='showCopySuccessMessage()' clip-copy="url">Copy to Clipboard</button>
-            <button class='btn' ng-show='generated' ng-click="resetUrl()">Generate another url</button>
-             
-           <span ng-show="error" >{[error]}</span>
-           <span ng-show="url_copied" class='span-success'>Copied to Clipboard!</span>
-           </form>
-        </div>
+     
+        
   </body>
+  
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.js"></script>
   <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/zeroclipboard/2.2.0/ZeroClipboard.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.15/angular.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.15/angular-mocks.js"></script>
@@ -35,4 +51,5 @@
   <script src="//cdnjs.cloudflare.com/ajax/libs/lodash.js/3.5.0/lodash.min.js"></script>
   <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/ng-clip/0.2.6/ng-clip.min.js"></script>
   <script src="{% static 'app/scripts/controllers/url_shortener_create_controller.js' %}"></script>
+
 </html>

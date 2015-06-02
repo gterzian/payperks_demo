@@ -32,7 +32,7 @@ urlShortenerApp.controller('urlShortenerCreateUrlCtrl', ['$scope', '$rootScope',
     
     if (_.endsWith($scope.url, '/')) {
      
-    $http.post('/api/short_urls', {original:$scope.url, shortened:''}).
+    $http.post('api/short_urls/', {original:$scope.url, shortened:''}).
       success(function(data, status, headers, config) {
         // this callback will be called asynchronously
         // when the response is available
