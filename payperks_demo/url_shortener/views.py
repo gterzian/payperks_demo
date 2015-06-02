@@ -23,7 +23,9 @@ def short_url_redirect(request, short_url):
     
 
 def create_new_shortened_url(request):
-    '''In case of an existing shortened url for the original, we return the existing one'''
+    '''I realize this is sort of a duplicate from ShortenedUrlViewSet.create,
+    and here I do really ned to return a HttpResponseRedirect, so we are redirected to
+    the homepage and not the API page. HttpResponseRedirect.create is returning an API Response...'''
     if ShortenedURL.objects.filter(original=request.POST['original']).exists():
         shortened_url = ShortenedURL.objects.get(original=request.POST['original'])
         serializer = ShortenedUrlSerializer(shortened_url)
