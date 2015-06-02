@@ -13,7 +13,7 @@ from django.test import TestCase
 from payperks_demo.url_shortener.utils import short_string, LETTERS_AND_DIGITS
 
 
-class TestShortString(Exam, TestCase):
+class TestShortString(TestCase):
     
     def test_short_string_returns_result_of_length(self):
         for i in range(10):
@@ -28,4 +28,15 @@ class TestShortString(Exam, TestCase):
             already_generated.append(result)
             for letter in result:
                 self.assertTrue(letter in LETTERS_AND_DIGITS)
+                
+
+class TestShortenedURLViews(Exam, TestCase):
+    
+    def test_api_root(self):
+        resp = self.client.get(reverse('api:api-root'))
+        self.assertEqual(resp.status_code, 200)
+    
+    def test_shortened_urls_list_view(self):
+        resp = self.client.get(reverse('api:shortenedurl-list'))
+        self.assertEqual(resp.status_code, 200)
         

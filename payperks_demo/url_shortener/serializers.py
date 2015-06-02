@@ -7,3 +7,4 @@ class  ShortenedUrlSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = ShortenedURL
         fields = ('original', 'shortened')
+        

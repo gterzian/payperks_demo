@@ -7,9 +7,10 @@ from rest_framework import routers
 from payperks_demo.url_shortener import views
 
 router = routers.DefaultRouter()
-router.register(r'shortened_urls', views.ShortenedUrlViewSet)
+router.register(r'short_urls', views.ShortenedUrlViewSet)
+print router.urls
 
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
-    url(r'^api-v1/', include(router.urls)),
+    url(r'^api/', include(router.urls, namespace='api')),
 ]
