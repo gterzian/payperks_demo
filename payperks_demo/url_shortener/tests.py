@@ -15,10 +15,11 @@ from payperks_demo.url_shortener.utils import short_string
 
 class TestShortString(Exam, TestCase):
     
-    def test_short_string_returns_4_letters(self):
-        result = short_string()
-        self.assertEquals(len(result), 4)
-        
+    def test_short_string_returns_letters_of_lenght(self):
+        for i in range(10):
+            result = short_string(length=i)
+            self.assertEquals(len(result), i)
+
     def test_short_string_returns_unique_4_letters(self):
         already_generated = []
         for i in range(100):
