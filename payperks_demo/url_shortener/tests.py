@@ -53,8 +53,8 @@ class TestShortenedURLViews(Exam, TestCase):
         self.assertEquals(data['results'], [{u'original': u'test/', u'shortened': u'uu'}])
         
     def test_shortened_urls_list_view_POST_shortened_url(self):
-        resp = self.client.post(reverse('api:shortenedurl-list'), {'original': 'test_POST', 'shortened': 'POST'})
+        resp = self.client.post(reverse('api:shortenedurl-list'), {'original': 'test_POST', 'shortened': ''})
         self.assertEqual(resp.status_code, 201)
         short_url = ShortenedURL.objects.get(original='test_POST')
-        self.assertTrue(short_url)
+        self.assertTrue(short_url.shortened)
         
