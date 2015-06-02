@@ -5,14 +5,15 @@ from rest_framework.response import Response
 from django.http import HttpResponse, HttpResponseRedirect
 from django.core.urlresolvers import reverse
 from django.shortcuts import get_object_or_404
+from django.shortcuts import render
 
 from payperks_demo.url_shortener.models import ShortenedURL
 from payperks_demo.url_shortener.serializers import ShortenedUrlSerializer
 
 
 def home(request):
-    
-    return HttpResponse('ok')
+    context = {}
+    return render(request, 'url_shortener/index.html', context)
     
 
 def redirected(request, full_url):
