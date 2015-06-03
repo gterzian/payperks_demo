@@ -15,7 +15,7 @@
   </head>
   <body>
     
-    <div class="container">
+    <div class="container" ng-app='urlShortenerApp'>
       
        <div class="header clearfix">
          <nav>
@@ -33,7 +33,7 @@
        
    
        
-      
+     <div ng-controller='urlShortenerController'> 
        <h3>Create a new short URL</h1>
         <div id='error_panel' class="panel panel-danger">
           <div class="panel-heading">There was an error shortening the URL</div>
@@ -78,6 +78,7 @@
                    </table>
                  </div>
        
+     </div> 
      
 
 
@@ -106,6 +107,7 @@
   };
   $('#create_url').click(
     function(event){
+      return
       event.preventDefault();
       var url = $('#original').val();
       if (url == null) {
