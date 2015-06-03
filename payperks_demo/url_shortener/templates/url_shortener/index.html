@@ -73,7 +73,7 @@
                      </thead>
                      <tbody>
                 	     <tr ng-repeat='url in shortenedUrls'>
-                          <td> <button clip-copy='copyShortenedUrl($index)' class="btn btn-xs btn-primary">Copy</button> <a href="/m/{[url.shortened]}/">/m/{[url.shortened]}/</a> </td>
+                          <td> <button clip-copy='copyShortenedUrl($index)' ng-click='showCopy($index)' class="btn btn-xs btn-primary">Copy</button> <a href="/m/{[url.shortened]}/">/m/{[url.shortened]}/</a> <span ng-show='copied{[$index]}'  class="label label-info">Copied!</span> </td>
                         <td>{[url.original ]}</td>
                        
                         
@@ -151,9 +151,15 @@
       $scope.message = null;
       $scope.error = null;
       $scope.original = null;
+      $scope.copied=false;
     };
 	
     initScope();
+    
+    $scope.showCopy = function (index) {
+      $scope['copied' + index] = true;
+      setTimeout(function() { $scope['copied' + index]=false; }, 1000);
+    };
     
     $scope.copyShortenedUrl = function (index) {
       var short_url = $scope.shortenedUrls[index]
