@@ -33,10 +33,16 @@
      <div ng-controller='urlShortenerController'> 
        <h3>Create a new short URL</h1>
          
-        <div id='error_panel' ng-show='error' class="panel panel-danger">
-          <div class="panel-heading">There was an error shortening the URL</div>
+        <div id='message_panel' ng-show='error' class="panel panel-danger">
+          <div class="panel-heading">There was an message shortening the URL</div>
           <div class="panel-body" >
            {[error]}
+          </div>
+        </div>
+        <div ng-show='message' class="panel panel-info">
+          <div class="panel-heading">There was an message shortening the URL</div>
+          <div class="panel-body" >
+           {[message]}
           </div>
         </div>
         
@@ -140,9 +146,9 @@
   
     var initScope = function () {
     	urlShortener.init().then(function(urls){
-        console.log(urls)
         $scope.shortenedUrls = urls.results;
     	})
+      $scope.message = null;
       $scope.error = null;
       $scope.original = null;
     };
@@ -164,7 +170,8 @@
         return
       }
   		urlShortener.shorten_url({original: $scope.original, shortened: ''}).then(function(url){
-  		   initScope();
+        $scope.message = 'Shortened URL successfully generated for ' + $scope.original;
+        setTimeout(function() { initScope(); }, 3000);
   		})
   	}
 	
