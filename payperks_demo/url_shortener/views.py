@@ -1,11 +1,15 @@
+import json
+
 from rest_framework import viewsets
 from rest_framework import status
 from rest_framework.response import Response
+from rest_framework.decorators import api_view
 
 from django.http import HttpResponse, HttpResponseRedirect
 from django.core.urlresolvers import reverse
 from django.shortcuts import get_object_or_404
 from django.shortcuts import render
+from django.views.decorators.csrf import csrf_exempt
 
 from payperks_demo.url_shortener.models import ShortenedURL
 from payperks_demo.url_shortener.serializers import ShortenedUrlSerializer
@@ -21,19 +25,21 @@ def short_url_redirect(request, short_url):
     url = get_object_or_404(ShortenedURL, shortened=short_url)
     return HttpResponseRedirect(url.original)
     
-
+@api_view(['POST'])
 def create_new_shortened_url(request):
-    '''I realize this is sort of a duplicate from ShortenedUrlViewSet.create,
-    and here I do really ned to return a HttpResponseRedirect, so we are redirected to
-    the homepage and not the API page. HttpResponseRedirect.create is returning an API Response...'''
-    if ShortenedURL.objects.filter(original=request.POST['original']).exists():
-        shortened_url = ShortenedURL.objects.get(original=request.POST['original'])
+    '''endpoint for posts with Angular, cause the API is giving me troubles right now'''
+    data = json.loads(request.body)
+    if ShortenedURL.objects.filter(original=data['original']).exists():
+        shortened_url = ShortenedURL.objects.get(original=data['original'])
         serializer = ShortenedUrlSerializer(shortened_url)
+        return Response(serializer.data, status=status.HTTP_200_OK)
     else:
-        serializer = ShortenedUrlSerializer(data=request.POST)
+        serializer = ShortenedUrlSerializer(data=data)
         if serializer.is_valid():
             serializer.save()
-    return HttpResponseRedirect('/#url_list')
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        else:
+            return Response(serializer.errors)
 
 
 class ShortenedUrlViewSet(viewsets.ModelViewSet):
