@@ -11,3 +11,4 @@ static3==0.6.1
 wsgiref==0.1.2
 coverage==3.7.1
 coveralls==0.5
+whitenoise==1.0.6

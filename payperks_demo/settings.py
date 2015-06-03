@@ -118,6 +118,7 @@ REST_FRAMEWORK = {
 
 if os.environ['HOME'] == '/app':
     #heroku settings
+    STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
     # Parse database configuration from $DATABASE_URL
     DATABASES['default'] =  dj_database_url.config()
 
