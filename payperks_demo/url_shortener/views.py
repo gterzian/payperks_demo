@@ -17,7 +17,6 @@ from payperks_demo.url_shortener.serializers import ShortenedUrlSerializer
 
 def home(request):
     context = {}
-    context['short_urls'] = ShortenedURL.objects.all().order_by('-pk')
     return render(request, 'url_shortener/index.html', context)
 
 
@@ -30,7 +29,7 @@ class ShortenedUrlViewSet(viewsets.ModelViewSet):
     """
     API endpoint that allows shortened urls to be viewed or edited.
     """
-    queryset = ShortenedURL.objects.all()
+    queryset = ShortenedURL.objects.all().order_by('-pk')
     serializer_class = ShortenedUrlSerializer
     
     def create(self, request):
