@@ -77,20 +77,6 @@ class TestShortenedURLViews(Exam, TestCase):
         data = json.loads(resp.content)
         self.assertEqual(data['original'], 'test_POST')
         self.assertEqual(ShortenedURL.objects.filter(original='test_POST').count(), 1)
-
-
-class TestHome(TestCase):
-    
-    def test_home_200(self):
-        resp = self.client.get(reverse('home'))
-        self.assertEquals(resp.status_code, 200)
-        
-
-class TestCreate(TestCase):
-    
-    def test_create(self):
-        resp = self.client.post(reverse('create_new_shortened_url'), {'original': 'test_POST', 'shortened': ''})
-        self.assertEqual(resp.status_code, 302)
         
 
 class TestHomeRedirect(TestCase):

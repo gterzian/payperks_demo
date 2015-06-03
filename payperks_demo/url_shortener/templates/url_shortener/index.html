@@ -68,14 +68,12 @@
                        </tr>
                      </thead>
                      <tbody>
-                       {% for url in short_urls %}
+                	     <tr ng-repeat='url in shortenedUrls'>
+                        <td>{[url.original]}</td>
+                        <td> <a href="{[url.shortened]}">{[url.shortened]}</a></td>
                         
-                         <tr>
-                           <td>{{url.original}}</td>
-                           <td> <a href="{% url 'short_url_redirect'  url.shortened %}">{% url 'short_url_redirect'  url.shortened %}</a></td>
-                         
-                         </tr>
-                         {% endfor %}
+                	     </tr>
+                      
                      </tbody>
                    </table>
                  </div>

@@ -10,5 +10,6 @@ class  ShortenedUrlSerializer(serializers.HyperlinkedModelSerializer):
         fields = ('original', 'shortened')
         
     def create(self, validated_data):
-        validated_data['shortened'] = short_string(already=[url[0] for url in ShortenedURL.objects.values_list('shortened')])
+        print validated_data
+        validated_data['shortened'] = "/m/{0}/".format(short_string(already=[url[0] for url in ShortenedURL.objects.values_list('shortened')]))
         return ShortenedURL.objects.create(**validated_data)
