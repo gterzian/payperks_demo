@@ -112,7 +112,7 @@
   	var init = function () {
   		var deferred = $q.defer();
 	
-  		$http.get('api/short_urls/').success(function(urls, status, headers, config) {
+  		$http.get('/api/short_urls/').success(function(urls, status, headers, config) {
   						 deferred.resolve(urls)
 					 
   			        }); 
