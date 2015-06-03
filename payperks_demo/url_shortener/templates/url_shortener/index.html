@@ -60,14 +60,16 @@
                    <table class="table table-striped">
                      <thead>
                        <tr>
+                        <th>shortened URL</th>
                          <th>Original URL</th>
-                         <th>shortened URL</th>
+                        
                        </tr>
                      </thead>
                      <tbody>
                 	     <tr ng-repeat='url in shortenedUrls'>
-                        <td>{[url.original]}</td>
-                        <td> <a href="/m/{[url.shortened]}/">/m/{[url.shortened]}/</a></td>
+                          <td> <a href="/m/{[url.shortened]}/">/m/{[url.shortened]}/</a></td>
+                        <td>{[url.original ]}</td>
+                       
                         
                 	     </tr>
                       
