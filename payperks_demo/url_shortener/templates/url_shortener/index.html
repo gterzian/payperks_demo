@@ -73,7 +73,7 @@
                      </thead>
                      <tbody>
                 	     <tr ng-repeat='url in shortenedUrls'>
-                          <td> <a href="/m/{[url.shortened]}/">/m/{[url.shortened]}/</a></td>
+                          <td> <button clip-copy='copyShortenedUrl($index)' class="btn btn-xs btn-primary">Copy</button> <a href="/m/{[url.shortened]}/">/m/{[url.shortened]}/</a> </td>
                         <td>{[url.original ]}</td>
                        
                         
@@ -154,6 +154,12 @@
     };
 	
     initScope();
+    
+    $scope.copyShortenedUrl = function (index) {
+      var short_url = $scope.shortenedUrls[index]
+      var full_url = "http://{{request.get_host}}/m/" + short_url.shortened + "/";
+      return full_url; 
+    };
 
    	$scope.shortenUrl = function () {
       var base_url = 'powerful-citadel-2869.herokuapp.com/'
